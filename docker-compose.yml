@@ -1,20 +1,11 @@
 version: '3'
 services:
-  tf-keras:
-    image: sdavidhdez/tensorflow-py3-keras:latest
+  tf-extras:
+    image: sdavidhdez/docker-tensorflow-py3-extras:latest
     restart: always
-    container_name: 'tf-keras'
+    container_name: 'tf-extras'
     ports:
       - '8888:8888'
     volumes:
       - './notebooks:/notebooks'
       - './volumes/jupyter_notebook_config.py:/root/.jupyter/jupyter_notebook_config.py'
-    environment:
-      - VIRTUAL_HOST=jupyter.totum.one
-      - VIRTUAL_PORT=8888
-      - LETSENCRYPT_HOST= 'jupyter.totum.one'
-
-networks:
-  default:
-    external:
-      name: webproxy
