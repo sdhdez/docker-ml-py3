@@ -1,10 +1,11 @@
 version: '3'
 services:
-  ml-py3:
-    image: sdavidhdez/ml-py3:latest
-    restart: always
-    container_name: 'ml-py3'
-    ports:
-      - '8888:8888'
-    volumes:
-      - './volumes/jupyter_notebook_config.py:/root/.jupyter/jupyter_notebook_config.py'
+    ml-py3:
+        image: sdavidhdez/ml-py3:latest
+        restart: always
+        container_name: 'ml-py3'
+        ports:
+            - '8888:8888'
+        volumes:
+            - './notebooks/:/home/jupyterlab/notebooks/'
+            - './volumes/jupyter_notebook_config.py:/root/.jupyter/jupyter_notebook_config.py'
