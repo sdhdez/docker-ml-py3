@@ -1,3 +1,3 @@
-# docker-tensorflow-py3-keras
+# docker-ml-py3
 
-Dockerfiles to build an image with tensorflow and keras.
+Dockerfile to build docker image with machine learning tools and frameworks. 
