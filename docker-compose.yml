@@ -1,11 +1,10 @@
 version: '3'
 services:
-  tf-extras:
-    image: sdavidhdez/docker-tensorflow-py3-extras:latest
+  ml-py3:
+    image: sdavidhdez/ml-py3:latest
     restart: always
-    container_name: 'tf-extras'
+    container_name: 'ml-py3'
     ports:
       - '8888:8888'
     volumes:
-      - './notebooks:/notebooks'
       - './volumes/jupyter_notebook_config.py:/root/.jupyter/jupyter_notebook_config.py'
