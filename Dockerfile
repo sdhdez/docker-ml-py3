@@ -61,7 +61,7 @@ RUN jupyter labextension install jupyterlab_vim
 
 # ML
 RUN cd ~ && pip --no-cache-dir install nltk
-RUN pip --no-cache-dir install tensorflow==1.7.1
+RUN pip --no-cache-dir install tensorflow
 RUN pip --no-cache-dir install keras
 RUN pip --no-cache-dir install gensim
 RUN pip --no-cache-dir install whoosh
@@ -89,4 +89,4 @@ RUN chown $user:$user -R /home/$user/*
 
 USER $user
 
-CMD ["/run_jupyterlab.sh", "--allow-root", "--no-browser", "--ip=0.0.0.0"]
+CMD ["/run_jupyterlab.sh", "--no-browser", "--ip=0.0.0.0"]
