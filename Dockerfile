@@ -70,8 +70,10 @@ RUN pip --no-cache-dir install tensorflow
 RUN pip --no-cache-dir install keras
 RUN pip --no-cache-dir install gensim
 
+# Change Owner
+RUN chown $user:$user -R /home/$user/.*
+
 # Environment
-USER $user
 ENV USER=/home/$user
 ENV HOME=/home/$user
 ENV APP=/home/$user/app
@@ -83,9 +85,6 @@ EXPOSE 8888
 # Application
 RUN mkdir $APP
 WORKDIR $APP
-
-# Configuration
-RUN chown $user:$user -R /home/$user/.*
 
 USER $user
 
