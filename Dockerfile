@@ -61,14 +61,14 @@ RUN jupyter labextension install jupyterlab_vim
 
 # ML
 RUN cd ~ && pip --no-cache-dir install nltk
+RUN pip --no-cache-dir install python-crfsuite
+RUN pip --no-cache-dir install whoosh
+RUN pip --no-cache-dir install numpy
+RUN pip --no-cache-dir install matplotlib
+RUN pip --no-cache-dir install scikit-learn
 RUN pip --no-cache-dir install tensorflow
 RUN pip --no-cache-dir install keras
 RUN pip --no-cache-dir install gensim
-RUN pip --no-cache-dir install whoosh
-RUN pip --no-cache-dir install numpy
-RUN pip --no-cache-dir install python-crfsuite
-RUN pip --no-cache-dir install matplotlib
-RUN pip --no-cache-dir install scikit-learn
 
 # Environment
 USER $user
@@ -85,7 +85,7 @@ RUN mkdir $APP
 WORKDIR $APP
 
 # Configuration
-RUN chown $user:$user -R /home/$user/*
+RUN chown $user:$user -R /home/$user/.*
 
 USER $user
 
