@@ -68,17 +68,19 @@ RUN jupyter labextension install jupyterlab_vim
 
 # ML
 RUN cd ~ && pip --no-cache-dir install nltk
-RUN pip --no-cache-dir install tensorflow-gpu==1.7.1
-RUN pip --no-cache-dir install keras
-RUN pip --no-cache-dir install gensim
+RUN pip --no-cache-dir install python-crfsuite
 RUN pip --no-cache-dir install whoosh
 RUN pip --no-cache-dir install numpy
-RUN pip --no-cache-dir install python-crfsuite
 RUN pip --no-cache-dir install matplotlib
 RUN pip --no-cache-dir install scikit-learn
+RUN pip --no-cache-dir install keras
+RUN pip --no-cache-dir install gensim
+RUN pip --no-cache-dir install tensorflow-gpu
+
+# Change Owner
+RUN chown $user:$user -R /home/$user/.*
 
 # Environment
-USER $user
 ENV USER=/home/$user
 ENV HOME=/home/$user
 ENV APP=/home/$user/app
@@ -91,9 +93,6 @@ EXPOSE 8888
 RUN mkdir $APP
 WORKDIR $APP
 
-# Configuration
-RUN chown $user:$user -R /home/$user/*
-
 USER $user
 
-CMD ["/run_jupyterlab.sh", "--allow-root", "--no-browser", "--ip=0.0.0.0"]
+CMD ["/run_jupyterlab.sh", "--no-browser", "--ip=0.0.0.0"]
