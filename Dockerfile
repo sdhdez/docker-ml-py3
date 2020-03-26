@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 LABEL maintainer="Simon D. Hernandez <sdhdez@totum.one>"
 
 # User add
@@ -10,7 +10,7 @@ RUN useradd -u $UID -U -ms /bin/bash $user
 USER root
 
 # Vim
-# Python 3.6
+# Python 3.X
 # nodejs
 # Cuda
 RUN apt-get update && \
@@ -27,10 +27,14 @@ RUN apt-get update && \
             build-essential \
             libfreetype6-dev \
             libhdf5-serial-dev \
-            libpng12-dev \
             libzmq3-dev \
             pkg-config \
             unzip \
+            ca-certificates \
+            locales \
+            python3-pycurl \
+            nodejs \
+            npm \
     && \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && \
@@ -57,7 +61,7 @@ RUN pip --no-cache-dir install \
 RUN pip --no-cache-dir install jupyterlab
 
 # jupyterlab_vim
-RUN jupyter labextension install jupyterlab_vim
+# RUN jupyter labextension install jupyterlab_vim
 
 # ML
 RUN cd ~ && pip --no-cache-dir install nltk
@@ -69,6 +73,9 @@ RUN pip --no-cache-dir install scikit-learn
 RUN pip --no-cache-dir install tensorflow
 RUN pip --no-cache-dir install keras
 RUN pip --no-cache-dir install gensim
+RUN pip --no-cache-dir install pandas
+RUN pip --no-cache-dir install spacy
+RUN pip --no-cache-dir install torch torchvision
 
 # Change Owner
 RUN chown $user:$user -R /home/$user/.*
