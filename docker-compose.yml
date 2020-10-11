@@ -9,8 +9,7 @@ services:
         volumes:
             - './volumes/notebooks/:/home/jupyterlab/app/notebooks'
             - './volumes/jupyter_notebook_config.py:/home/jupyterlab/.jupyter/jupyter_notebook_config.py'
-            # - './volumes/kleis_data/:/home/jupyterlab/kleis_data'
-            # - './volumes/shared-space/:/home/jupyterlab/shared-space'
+            - './volumes/shared-space/:/home/jupyterlab/shared-space'
         environment:
             - VIRTUAL_HOST=jupyter.totum.one
             - VIRTUAL_PORT=8888
