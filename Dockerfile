@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 LABEL maintainer="Simon D. Hernandez <sdhdez@totum.one>"
 
 # User add
@@ -24,7 +24,10 @@ RUN apt-get update && \
             python3-venv \
             python-pip-whl \
             python3-pip \
+            python3-pycurl \
             build-essential \
+            libssl-dev \
+            libffi-dev \
             libfreetype6-dev \
             libhdf5-serial-dev \
             libzmq3-dev \
@@ -32,11 +35,9 @@ RUN apt-get update && \
             unzip \
             ca-certificates \
             locales \
-            python3-pycurl \
-            nodejs \
-            npm \
+            git \
     && \
-    curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+    curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && \
     apt-get install -y --no-install-recommends \
             nodejs \
@@ -52,33 +53,8 @@ RUN ln -s -f /usr/bin/python3 /usr/bin/python && \
 RUN pip --no-cache-dir install --upgrade pip
 RUN pip --no-cache-dir install --upgrade setuptools wheel
 
-# Python basics
-RUN pip --no-cache-dir install \
-        nose2 \
-        pylint
-
-# JupyterLab
-RUN pip --no-cache-dir install jupyterlab
-
-# jupyterlab_vim
-# RUN jupyter labextension install jupyterlab_vim
-
-# ML
-RUN cd ~ && pip --no-cache-dir install nltk
-RUN pip --no-cache-dir install python-crfsuite
-RUN pip --no-cache-dir install whoosh
-RUN pip --no-cache-dir install numpy
-RUN pip --no-cache-dir install matplotlib
-RUN pip --no-cache-dir install scikit-learn
-RUN pip --no-cache-dir install tensorflow
-RUN pip --no-cache-dir install keras
-RUN pip --no-cache-dir install gensim
-RUN pip --no-cache-dir install pandas
-RUN pip --no-cache-dir install spacy
-RUN pip --no-cache-dir install torch torchvision
-
-# Change Owner
-RUN chown $user:$user -R /home/$user/.*
+# Bash
+RUN ln -sf /bin/bash /bin/sh
 
 # Environment
 ENV USER=/home/$user
@@ -92,7 +68,30 @@ EXPOSE 8888
 # Application
 RUN mkdir $APP
 WORKDIR $APP
+RUN mkdir $HOME/.jupyter
+
+# Change Owner
+RUN chown $user:$user -R /home/$user/
 
 USER $user
+
+# Python basics
+RUN pip --no-cache-dir install --upgrade --user nose2 pylint
+
+# ML
+RUN pip --no-cache-dir install --upgrade --user \
+        numpy \
+        scipy \
+        matplotlib \
+        ipython \
+        jupyter \
+        pandas \
+        sympy \
+        nbresuse \
+        jupyterlab
+# RUN pip --no-cache-dir install scispacy
+
+# jupyterlab_vim
+# RUN jupyter labextension install jupyterlab_vim
 
 CMD ["/run_jupyterlab.sh", "--no-browser", "--ip=0.0.0.0"]
