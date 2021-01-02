@@ -109,7 +109,7 @@ RUN pip --no-cache-dir install --upgrade --user \
         nbresuse \
         jupyterlab
 RUN pip --no-cache-dir install --upgrade --user numba
-RUN pip --no-cache-dir install --upgrade --user umap-project
+RUN pip --no-cache-dir install --upgrade --user umap-learn
 RUN pip --no-cache-dir install --upgrade --user scikit-learn
 RUN pip --no-cache-dir install --upgrade --user spacy
 # RUN pip --no-cache-dir install scispacy
