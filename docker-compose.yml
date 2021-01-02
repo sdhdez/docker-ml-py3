@@ -8,7 +8,6 @@ services:
             - '8888:8888'
         volumes:
             - './volumes/notebooks/:/home/jupyterlab/app/notebooks'
-            - './volumes/jupyter_notebook_config.py:/home/jupyterlab/.jupyter/jupyter_notebook_config.py'
             - './volumes/shared-space/:/home/jupyterlab/shared-space'
         environment:
             - VIRTUAL_HOST=jupyter.totum.one
